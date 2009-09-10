@@ -1,0 +1,62 @@
+= Tracepoint
+
+* http://death.rubyforge.org
+* http://death.rubyforge.org/tracepoint
+
+== DESCRIPTION:
+
+A TracePoint is a Binding with the addition of event information.
+Among other things, it functions very well as the join-point for AOP.
+In practice it provides a better means than #set_trace_func.
+
+== FEATURES/PROBLEMS:
+
+* Easier and more versitle than #set_trace_func.
+* Set mutliple traces easily.
+
+== RELEASE/NOTES:
+
+Please see RELEASE file.
+
+== SYNOPSIS:
+
+Let's watch everything that happens:
+
+   TracePoint.trace { |tp|
+     puts "#{tp.self.class}\t#{tp.called}\t#{tp.event}\t#{tp.return?}\t#{tp.back == tp.bind}"
+   }
+
+   1 + 1
+
+produces
+
+   Class   trace   return     true    false
+   Object          line       false   false
+   Fixnum  +       c-call     false   false
+   Fixnum  +       c-return   false   false
+
+See RDocs for more information.
+
+== INSTALL:
+
+* sudo gem install tracepoint
+
+== LICENSE:
+
+(LGPL v3 License)
+
+Copyright (c) 2005,2009 The Coding Dead <death.rubyforge.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+

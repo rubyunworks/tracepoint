@@ -1,0 +1,12 @@
+= HISTORY
+
+== 1.0.0 / 2009-07-10
+
+Tracepoint is a spin-off of Ruby Facets. This is it's first release as
+a stand alone project. Tracepoint is a Binding with event information that
+can be used to trace execution, akin to #set_trace_func.
+
+* 1 major enhancement
+
+  * Birthday!
+
