@@ -1,7 +1,8 @@
 = Tracepoint
 
-* http://death.rubyforge.org
-* http://death.rubyforge.org/tracepoint
+* http://rubyworks.github.com/tracepoint
+* http://github.com/rubyworks/tracepoint
+
 
 == DESCRIPTION:
 
@@ -9,14 +10,17 @@ A TracePoint is a Binding with the addition of event information.
 Among other things, it functions very well as the join-point for AOP.
 In practice it provides a better means than #set_trace_func.
 
+
 == FEATURES/PROBLEMS:
 
 * Easier and more versitle than #set_trace_func.
 * Set mutliple traces easily.
 
-== RELEASE/NOTES:
 
-Please see RELEASE file.
+== RELEASE NOTES:
+
+Please see HISTORY file.
+
 
 == SYNOPSIS:
 
@@ -37,9 +41,11 @@ produces
 
 See RDocs for more information.
 
+
 == INSTALL:
 
 * sudo gem install tracepoint
+
 
 == LICENSE:
 
