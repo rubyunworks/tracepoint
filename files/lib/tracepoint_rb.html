@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>File: tracepoint.rb [Tracepoint]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='file' id='wrapper'>
+      <div class='header'>
+        <div class='name'>tracepoint.rb</div>
+        <div class='paths'>
+          lib/tracepoint.rb
+        </div>
+        <div class='last-update'>
+          Last Update:
+          <span class='datetime'>Wed Sep 09 07:09:04 -0400 2009</span>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <h1><a href="../../classes/TracePoint.html">TracePoint</a></h1>
+            <p>
+            A <a href="../../classes/TracePoint.html">TracePoint</a> is a Binding with
+            the addition event information. And it&#8217;s a better way to use
+            set_trace_func.
+            </p>
+            <p>
+            A <a href="../../classes/TracePoint.html">TracePoint</a> is a Binding with
+            the addition of event information. Among other things, it functions very
+            well as the join-point for Event-based AOP.
+            </p>
+            <h2>Usage</h2>
+            <pre>TracePoint.trace { |tp|&#x000A;  puts &quot;#{tp.self.class}\t#{tp.called}\t#{tp.event}\t#{tp.return?}\t#{tp.back == tp.bind}&quot;&#x000A;}&#x000A;&#x000A;1 + 1</pre>
+            <p>
+            produces
+            </p>
+            <pre>Class   trace   return     true    false&#x000A;Object          line       false   false&#x000A;Fixnum  +       c-call     false   false&#x000A;Fixnum  +       c-return   false   false</pre>
+            <h2>Notes</h2>
+            <p>
+            You can&#8217;t subclass Binding, so we delegate (which is better anyway).
+            </p>
+            <h2>Authors</h2>
+            <ul>
+            <li>Thomas Sawyer
+            
+            </li>
+            </ul>
+            <h2>Copying</h2>
+            <p>
+            Copyright &#169; 2005 Thomas Sawyer
+            </p>
+            <p>
+            Ruby License
+            </p>
+            <p>
+            This module is free software. You may use, modify, and/or redistribute this
+            software under the same terms as Ruby.
+            </p>
+            <p>
+            This program is distributed in the hope that it will be useful, but WITHOUT
+            ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+            FITNESS FOR A PARTICULAR PURPOSE.
+            </p>
+          </div>
+          <div id='context'>
+            <div id='requires'>
+              <h2>Required files</h2>
+              <ol>
+                <li>facets/binding</li>
+              </ol>
+            </div>
+          </div>
+          <div id='section'>
+            <div id='constants-list'>
+              <h2>Constants</h2>
+              <div class='name-list'>
+                <table summary='Constants'>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>CodePoint</td>
+                    <td>=</td>
+                    <td class='context-item-value'>Binding</td>
+                    <td>&nbsp;</td>
+                    <td class='context-item-desc'>
+                      <h1>CodePoint</h1>
+                      
+                      This is the same as a Binding. Not really needed, but I like consistency :)
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>
