@@ -36,11 +36,11 @@ Produces:
    Fixnum   +   c-call     false
    Fixnum   +   c-return   false
 
-Tracing can be deactived and reactivates on the fly by calling #deactivate
+Tracing can be deactived and reactivated on the fly by calling #deactivate
 and #activate.
 
-To add an additional trace procedure, simple call the #trace method again.
-Trace procedures can also be nameed by providing a name argument to the
+To add additional trace procedures, simply call the #trace method again.
+Trace procedures can also be named by providing a name argument to the
 #trace method. This allows traces to be added and removed without affecting
 other traces.
 
