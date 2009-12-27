@@ -8,6 +8,7 @@ Changes:
 
 * Support for multiple traces.
 * Trace procedures can be named.
+* TracePoint has file name and line number.
 
 
 == 1.0.0 / 2009-07-10

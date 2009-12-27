@@ -1,0 +1,81 @@
+---
+box:
+  service: Box
+  types  : [gem, gz]
+  include: [bin, demo, lib, meta, test, "[A-Z]*"]
+  exclude: ~
+  master : false
+  active : true
+
+dnote:
+  service  : DNote
+  loadpath : ~
+  labels   : ~
+  output   : ~
+  format   : ~
+  active   : true
+
+stats:
+  service  : Stats
+  title    : ~
+  loadpath : ~
+  exclude  : ~
+  output   : ~
+  active   : true
+
+rdoc:
+  service  : RDoc
+  template : redfish
+  include  : ~
+  exclude  : ~
+  main     : ~
+  extra    : ~
+  active   : true
+
+ridoc:
+  service: RIDoc
+  include: ~
+  exclude: ~
+  active : true
+
+vclog:
+  service  : VClog
+#  format   : html   # xml, txt
+  layout   : rel    # gnu
+  typed    : true
+  output   : ~
+  active   : false
+
+email:
+  service : Email
+  file    : ~
+  subject : ~
+  mailto  : ruby-talk@ruby-lang.org
+  from    : <%= ENV['EMAIL_ACCOUNT'] %>
+  server  : <%= ENV['EMAIL_SERVER'] %>
+  port    : <%= ENV['EMAIL_PORT'] %>
+  account : <%= ENV['EMAIL_ACCOUNT'] %>
+  domain  : <%= ENV['EMAIL_DOMAIN'] %>
+  login   : <%= ENV['EMAIL_LOGIN'] %>
+  secure  : <%= ENV['EMAIL_SECURE'] %>
+  active  : true
+
+
+#testrb:
+#  service  : Testrb
+# tests    : ~
+#  exclude  : ~
+#  loadpath : ~
+#  requires : ~
+#  live     : false   
+#  active   : false
+
+#rubyforge:
+#  service : Rubyforge
+#  unixname: <%= suite %>
+#  groupid : ~
+#  package : <%= name %>
+#  sitemap:
+#    doc/rdoc: <%= name %>
+#  active  : false
+
