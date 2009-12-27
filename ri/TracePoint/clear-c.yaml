@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Clear all trace procedures, or a specific trace by name.
+full_name: TracePoint::clear
+is_singleton: true
+name: clear
+params: (name=nil)
+visibility: public

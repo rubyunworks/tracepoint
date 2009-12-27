@@ -1,0 +1,13 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: 
+- !ruby/object:RDoc::RI::AliasName 
+  name: called
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Returns the name of the event's method.
+full_name: TracePoint#callee
+is_singleton: false
+name: callee
+params: ()
+visibility: public
