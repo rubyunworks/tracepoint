@@ -1,57 +1,79 @@
-= Tracepoint
+= TracePoint
 
 * http://rubyworks.github.com/tracepoint
 * http://github.com/rubyworks/tracepoint
 
 
-== DESCRIPTION:
+== DESCRIPTION
 
-A TracePoint is a Binding with the addition of event information.
-Among other things, it functions very well as the join-point for AOP.
-In practice it provides a better means than #set_trace_func.
-
-
-== FEATURES/PROBLEMS:
-
-* Easier and more versitle than #set_trace_func.
-* Set mutliple traces easily.
+TracePoint is a Binding with the addition of event information.
+In theory it would function very well as the join-point for AOP.
+In practice it provides a better approach to #set_trace_func.
 
 
-== RELEASE NOTES:
+== FEATURES
 
-Please see HISTORY file.
+* More versitle than #set_trace_func.
+* Easy to set mutliple traces.
 
 
-== SYNOPSIS:
+== SYNOPSIS
 
-Let's watch everything that happens:
+Using TracePoint is simply a matter of setting the #trace procedure.
+For example to watch everything that happens during a Ruby process:
 
-   TracePoint.trace { |tp|
-     puts "#{tp.self.class}\t#{tp.called}\t#{tp.event}\t#{tp.return?}\t#{tp.back == tp.bind}"
-   }
+   TracePoint.trace do |tp|
+     puts "#{tp.self.class}\t#{tp.callee}\t#{tp.event}\t#{tp.return?}"
+   end
+
+   TracePoint.activate
 
    1 + 1
 
-produces
+Produces:
 
-   Class   trace   return     true    false
-   Object          line       false   false
-   Fixnum  +       c-call     false   false
-   Fixnum  +       c-return   false   false
+   Object       line       false
+   Fixnum   +   c-call     false
+   Fixnum   +   c-return   false
 
-See RDocs for more information.
+Tracing can be deactived and reactivates on the fly by calling #deactivate
+and #activate.
+
+To add an additional trace procedure, simple call the #trace method again.
+Trace procedures can also be nameed by providing a name argument to the
+#trace method. This allows traces to be added and removed without affecting
+other traces.
+
+   TracePoint.trace(:class_trace) do |tp|
+     puts tp.self.class
+   end
+
+   TracePoint.trace(:method_trace) do |tp|
+     puts tp.callee
+   end
+
+   # ...
+
+   TracePoint.clear(:class_trace)
+
+Calling #clear with no arguments will remove all trace procedures and
+deactivate tracing.
+
+Please see the API documentation for more information.
 
 
-== INSTALL:
+== INSTALLATION
 
-* sudo gem install tracepoint
+Follow the usual procedure for installing via RubyGems:
+
+  $ sudo gem install tracepoint
 
 
-== LICENSE:
+== LICENSE
 
 (LGPL v3 License)
 
-Copyright (c) 2005,2009 The Coding Dead <death.rubyforge.org>
+Copyright (c) 2005,2009 Thomas Sawyer
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published

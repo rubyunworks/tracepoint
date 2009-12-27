@@ -1,5 +1,15 @@
 = RELEASE HISTORY
 
+== 1.1 / 2009-12-26
+
+This release fixes multi-tracing and adds named traces.
+
+Changes:
+
+* Support for multiple traces.
+* Trace procedures can be named.
+
+
 == 1.0.0 / 2009-07-10
 
 Tracepoint is a spin-off of Ruby Facets. This is it's first release as
