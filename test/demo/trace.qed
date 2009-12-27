@@ -1,7 +1,7 @@
 = TracePoint 
 
 To demonstrate TracePoint, we will simply have it feed all
-even parameters into the log for a simple arethmetic call.
+event parameters into the log for a simple arethmetic call.
 
 First we need to load the tracepoint.rb library.
 
@@ -15,7 +15,7 @@ Now we can setup the trace procedure.
     trace_log << [tp.self.class, tp.callee, tp.event, tp.return?, tp.back == tp.bind]
   end
 
-And then we can activate the trace, call out arethmetic function,
+And then we can activate the trace, call our arethmetic function,
 and deactivate the trace.
 
   TracePoint.activate
