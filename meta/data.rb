@@ -1,4 +1,4 @@
-Object.__send__(:remove_const, :VERSION) if defined?(VERSION)                    # because Ruby 1.8+ gets in the way
+Object.__send__(:remove_const, :VERSION) if defined?(VERSION)                    # because Ruby 1.8~ gets in the way
 
 class TracePoint
 
