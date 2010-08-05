@@ -1,10 +1,8 @@
 ---
 box:
   service: Box
-  types  : [gem, gz]
-  include: [bin, demo, lib, meta, test, "[A-Z]*"]
-  exclude: ~
-  master : false
+  types  : [gem]
+  spec   : '.gemspec'
   active : true
 
 dnote:

@@ -1,0 +1,12 @@
+#!mast -x Syckfile lib meta test [A-Z]*
+lib/tracepoint/meta/data.rb
+lib/tracepoint/meta/package.yml
+lib/tracepoint/meta/profile.yml
+lib/tracepoint.rb
+meta/data.rb
+meta/package.yml
+meta/profile.yml
+test/demos/trace.qed
+HISTORY.rdoc
+LICENSE
+README.rdoc

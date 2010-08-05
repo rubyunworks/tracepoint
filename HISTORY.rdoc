@@ -1,6 +1,19 @@
 = RELEASE HISTORY
 
-== 1.1 / 2009-12-26
+== 1.2.0 / 2010-08-05
+
+This release fix a rare bug where the traced event provides
+no binding. In this case we assume the TOPLEVEL_BINDING is at play.
+This release also move the library to the Apache 2.0 license.
+
+Changes:
+
+* Licensed under the Apache 2.0 license.
+* Default to TOPLEVEL_BINDING for events that provide no binding.
+* Deprecated CodePoint alias of Binding.
+
+
+== 1.1.0 / 2009-12-26
 
 This release fixes multi-tracing and adds named traces.
 

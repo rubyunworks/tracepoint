@@ -1,7 +1,7 @@
 --- 
 title  : TracePoint
 suite  : rubyworks
-summary: "The perefect alternative to #set_trace_func"
+summary: "The perfect alternative to #set_trace_func"
 contact: Thomas Sawyer <transfire@gmail.com>
 authors: Thomas Sawyer
 created: 2008-08-08 23:09:48 -0400

@@ -1,26 +1,5 @@
 # = TracePoint
 #
-# Copyright (c) 2005 Thomas Sawyer
-#
-# Ruby License
-#
-# This module is free software. You may use, modify, and/or redistribute this
-# software under the same terms as Ruby.
-#
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE.
-
-require 'facets/binding'
-
-# = CodePoint
-#
-# This is the same as a Binding. Not really needed, but I like consistency :)
-
-CodePoint = Binding
-
-# = TracePoint
-#
 # A TracePoint is a Binding with the addition event information.
 # And it's a better way to use set_trace_func.
 #
@@ -45,9 +24,14 @@ CodePoint = Binding
 #
 # == Notes
 #
-# You can't subclass Binding, so we delegate (which is better anyway).
+# CodePoint alias for Binding has been deprecated.
+#
+# We can't subclass Binding, so we delegate.
 
-class TracePoint  #< Codepoint
+class TracePoint #< CodePoint
+
+  # Load library metadata.
+  require 'tracepoint/meta/data'
 
   # -- class ---------------------
 
@@ -120,7 +104,7 @@ class TracePoint  #< Codepoint
     @file    = file
     @line    = line
     @method  = method
-    @binding = bind
+    @binding = bind || TOPLEVEL_BINDING #?
     @back_binding = back_binding
   end
 
@@ -137,7 +121,7 @@ class TracePoint  #< Codepoint
   # Delegates "self" to the binding which
   # in turn delegates the binding object.
   def self
-    @binding.self
+    @binding.self #if @binding
   end
 
   # Returns the name of the event's method.
@@ -147,9 +131,8 @@ class TracePoint  #< Codepoint
   #++
   def callee ; @method ; end
 
-  #def method ; @method ; end            # TODO Conflict with Kernel#method?
-  alias_method( :called, :callee )       # TODO deprecate
-  alias_method( :method_name, :called )  # TODO deprecate
+  #def method ; @method ; end            # TODO Conflict with Kernel#method ?
+  alias_method( :method_name, :callee )  # TODO deprecate
 
   # delegate to binding
   #def method_missing(meth, *args, &blk)
@@ -186,6 +169,25 @@ class TracePoint  #< Codepoint
   EVENT_MAP.each_pair do |m,v|
     define_method( "#{m}?" ){ v.include?(@event) }
   end
+end
+
+
+class Binding #:nodoc:
+
+  unless method_defined?(:eval) # 1.8.7+
+
+    # Evaluate a Ruby source code string (or block) in the binding context.
+    def eval(str)
+      Kernel.eval(str, self)
+    end
+
+  end
+
+  # Returns self of the binding context.
+  def self()
+    @_self ||= eval("self")
+  end
 
 end
 
+# Copyright (c) 2005,2010 Thomas Sawyer (Apache 2.0 License)

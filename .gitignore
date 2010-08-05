@@ -1,5 +1,5 @@
+.gemspec
 log
 pkg
-doc/rdoc
-doc/ri
-MANIFEST
+ri
+site/doc
