@@ -15,8 +15,8 @@ In practice it provides a better approach to #set_trace_func.
 
 == FEATURES
 
-* More versitle than #set_trace_func.
-* Easy to set mutliple traces.
+* More versatile than #set_trace_func.
+* Easy to set multiple traces.
 
 
 == SYNOPSIS
@@ -38,7 +38,7 @@ Produces:
    Fixnum   +   c-call     false
    Fixnum   +   c-return   false
 
-Tracing can be deactived and reactivated on the fly by calling #deactivate
+Tracing can be deactivated and reactivated on the fly by calling #deactivate
 and #activate.
 
 To add additional trace procedures, simply call the #trace method again.

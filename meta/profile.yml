@@ -4,8 +4,8 @@ suite  : rubyworks
 summary: "The perfect alternative to #set_trace_func"
 contact: Thomas Sawyer <transfire@gmail.com>
 authors: Thomas Sawyer
-created: 2008-08-08 23:09:48 -0400
-license: MIT
+created: 2008-08-08
+license: Apache 2.0
 
 copyright: (c) 2005 Thomas Sawyer
 
