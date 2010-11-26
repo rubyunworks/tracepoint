@@ -30,8 +30,8 @@
 
 class TracePoint #< CodePoint
 
-  # Load library metadata.
-  require 'tracepoint/meta/data'
+  # Current verison.
+  VERSION = "1.2.0"
 
   # -- class ---------------------
 
