@@ -1,4 +1,7 @@
 ---
+grancher:
+  active: true
+
 box:
   service: Box
   types  : [gem]
@@ -28,7 +31,7 @@ rdoc:
   exclude  : ~
   main     : ~
   extra    : ~
-  output   : site/doc/api
+  output   : site/docs/api
   active   : true
 
 ridoc:
@@ -72,10 +75,10 @@ email:
 
 #rubyforge:
 #  service : Rubyforge
-#  unixname: <%= suite %>
+#  unixname: <= name %>
 #  groupid : ~
-#  package : <%= name %>
+#  package : <= name %>
 #  sitemap:
-#    doc/rdoc: <%= name %>
+#    doc/rdoc: <= name %>
 #  active  : false
 
