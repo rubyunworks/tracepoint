@@ -1,21 +1,26 @@
 --- 
 title  : TracePoint
-suite  : rubyworks
 summary: "The perfect alternative to #set_trace_func"
 contact: Thomas Sawyer <transfire@gmail.com>
 authors: Thomas Sawyer
 created: 2008-08-08
 license: Apache 2.0
 
-copyright: (c) 2005 Thomas Sawyer
-
 description:
   A TracePoint is a Binding with the addition of event information.
   Among other things, it functions very well as the join-point for AOP.
   In practice it provides a better alternative to using #set_trace_func.
 
-resources:
-  homepage    : http://rubyworks.github.com/tracepoint
-  development : http://github.com/rubyworks/tracepoint
-  repository  : git://github.com/rubyworks/tracepoint.git
+requires:
+  - syckle (build)
+  - qed (test)
 
+resources:
+  home: http://rubyworks.github.com/tracepoint
+  code: http://github.com/rubyworks/tracepoint
+
+repositories:
+  public: git://github.com/rubyworks/tracepoint.git
+
+organization : RubyWorks
+copyright    : (c) 2005 Thomas Sawyer

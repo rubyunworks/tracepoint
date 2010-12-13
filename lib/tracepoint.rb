@@ -30,8 +30,22 @@
 
 class TracePoint #< CodePoint
 
-  # Current verison.
-  VERSION = "1.2.0"
+  # Access to metadata.
+  def self.metadata
+    @metadata ||= (
+      require 'yaml'
+      YAML.load(File.new(File.dirname(__FILE__) + '/tracepoint.yml'))
+    )
+  end
+
+  # Access metadata as constants.
+  def self.const_missing(name)
+    name = name.to_s.downcase
+    metadata[name] || super(name)
+  end
+
+  # TODO: this is here only b/c of lookup bugs in Ruby 1.8.x.
+  VERSION = metadata['version']
 
   # -- class ---------------------
 
@@ -58,7 +72,7 @@ class TracePoint #< CodePoint
       @@active = true
       bb_stack = []
       fn = lambda do |e, f, l, m, b, k|
-        unless k == TracePoint or (k == Kernel && m = :set_trace_func)
+        unless k == TracePoint or (k == Kernel && m == :set_trace_func)
           #(p e, f, l, m, b, k, @@bb_stack; puts "---") if $DEBUG
           if ['call','c-call','class'].include?(e)
             bb_stack << b
