@@ -19,7 +19,7 @@ if RUBY_VERSION < '1.9'
 
       TracePoint.trace do |tp|
         case tp.event
-        when 'line', 'call', 'end'
+        when 'line', 'class', 'end'
           unless ignore.include?(tp.file)
             file = File.expand_path(tp.file)
             result[file][tp.line-1] ||= 0
