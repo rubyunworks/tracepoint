@@ -18,7 +18,7 @@ qedoc:
   output: SPEC.rdoc
 
 yard:
-  active: true
+  priority: 2
 
 vclog:
   output:

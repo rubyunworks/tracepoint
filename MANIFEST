@@ -6,5 +6,6 @@ lib/tracepoint.rb
 lib/tracepoint.yml
 spec/trace.rdoc
 HISTORY.rdoc
+SPEC.rdoc
 README.rdoc
 COPYING.rdoc
