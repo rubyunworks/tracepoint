@@ -1,6 +1,6 @@
 ---
-gem
-  active : true
+gem:
+  active: true
 
 github:
   active: true

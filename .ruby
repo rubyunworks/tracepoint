@@ -1,38 +1,45 @@
---- 
-name: tracepoint
-repositories: 
-  public: git://github.com/rubyworks/tracepoint.git
-title: TracePoint
-contact: Thomas Sawyer <transfire@gmail.com>
-requires: 
-- group: 
+---
+source:
+- var
+authors:
+- name: Thomas Sawyer
+  email: transfire@gmail.com
+copyrights:
+- holder: Thomas Sawyer
+  year: '2005'
+  license: BSD-2-Clause
+replacements: []
+alternatives: []
+requirements:
+- name: detroit
+  groups:
   - build
-  name: syckle
-  version: 0+
-- group: 
+  development: true
+- name: qed
+  groups:
   - test
-  name: qed
-  version: 0+
-resources: 
-  code: http://github.com/rubyworks/tracepoint
+  development: true
+dependencies: []
+conflicts: []
+repositories:
+- uri: git://github.com/rubyworks/tracepoint.git
+  scm: git
+  name: upstream
+resources:
   home: http://rubyworks.github.com/tracepoint
-pom_verison: 1.0.0
-manifest: 
-- .ruby
-- lib/tracepoint.rb
-- lib/tracepoint.yml
-- qed/trace.rdoc
-- HISTORY.rdoc
-- LICENSE.txt
-- README.rdoc
-- VERSION
-version: 1.2.0
-copyright: (c) 2005 Thomas Sawyer
-licenses: 
-- Apache 2.0
-description: A TracePoint is a Binding with the addition of event information. Among other things, it functions very well as the join-point for AOP. In practice it provides a better alternative to using
+  code: http://github.com/rubyworks/tracepoint
+  mail: http://groups.google.com/groups/rubyworks-mailinglist
+extra: {}
+load_path:
+- lib
+revision: 0
+created: '2008-08-08'
+summary: The perfect alternative to set_trace_func
+title: TracePoint
+version: 1.2.1
+name: tracepoint
+description: ! "A TracePoint is a Binding with the addition of event information.\nAmong
+  other things, it functions very well as the join-point for\nAOP. In practice it
+  provides a better alternative to using \nset_trace_func."
 organization: RubyWorks
-summary: "The perfect alternative to #set_trace_func"
-authors: 
-- Thomas Sawyer
-created: 2008-08-08
+date: '2011-10-22'
