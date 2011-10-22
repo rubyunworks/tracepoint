@@ -1,9 +1,0 @@
-#!mast -x Syckfile -x PROFILE .ruby bin lib qed spec test [A-Z]*
-.ruby
-lib/tracepoint.rb
-lib/tracepoint.yml
-qed/trace.rdoc
-HISTORY.rdoc
-LICENSE.txt
-README.rdoc
-VERSION

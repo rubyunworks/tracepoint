@@ -1,0 +1,43 @@
+---
+gem
+  active : true
+
+github:
+  active: true
+
+dnote:
+  labels: ~
+  output:
+    - log/NOTES.rdoc
+
+qed:
+  files: spec/
+
+qedoc:
+  files: spec/
+  output: SPEC.rdoc
+
+yard:
+  active: true
+
+vclog:
+  output:
+    - log/Changes.rdoc
+    - log/History.rdoc
+
+email:
+  mailto:
+    - ruby-talk@ruby-lang.org
+    - rubyworks-mailinglist@googlegroups.com
+
+
+
+#rubyforge:
+#  service : Rubyforge
+#  unixname: <= name %>
+#  groupid : ~
+#  package : <= name %>
+#  sitemap:
+#    doc/rdoc: <= name %>
+#  active  : false
+

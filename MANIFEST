@@ -1,0 +1,10 @@
+#!mast .ruby .yardopts bin lib man spec test [A-Z]*.*
+.ruby
+.yardopts
+lib/tracepoint/coverage.rb
+lib/tracepoint.rb
+lib/tracepoint.yml
+spec/trace.rdoc
+HISTORY.rdoc
+README.rdoc
+COPYING.rdoc

@@ -1,6 +1,7 @@
-.gemspec
+.reap/digest
+.yardoc
+docs
 log
 pkg
-ri
 tmp
-site/docs
+
