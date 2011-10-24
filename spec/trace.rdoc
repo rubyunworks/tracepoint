@@ -1,7 +1,7 @@
 = TracePoint 
 
 To demonstrate TracePoint, we will simply have it feed all
-event parameters into the log for a simple arithmetic call.
+event parameters into the log for a simple String call.
 
 First we need to load the `tracepoint.rb` library.
 
@@ -15,18 +15,19 @@ Now we can setup the trace procedure.
     trace_log << [tp.self.class, tp.callee, tp.event, tp.return?, tp.back == tp.bind]
   end
 
-And then we can activate the trace, call our arithmetic function,
+And then we can activate the trace, call our String method,
 and deactivate the trace.
 
   TracePoint.activate
-  1 + 1
+  "a" + "b"
   TracePoint.deactivate
 
 We should now see in the log the set of events required to
 perform the addition operation.
 
-  trace_log[1].assert == [Fixnum, :'+', 'c-call',   false, false]
-  trace_log[2].assert == [Fixnum, :'+', 'c-return', false, false]
+  trace_log[1].assert == [String, :'+', 'c-call',   false, false]
+  trace_log[2].assert == [String, :'+', 'c-return', false, false]
 
 For reference, trace_log[0] and trace_log[3] simply refer to the
 QED run context.
+
