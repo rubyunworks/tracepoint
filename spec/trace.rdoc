@@ -19,15 +19,15 @@ And then we can activate the trace, call our String method,
 and deactivate the trace.
 
   TracePoint.activate
-  "a" + "b"
+  "  a  ".strip
   TracePoint.deactivate
 
 We should now see in the log the set of events required to
 perform the addition operation.
 
-  trace_log[1].assert == [String, :'+', 'c-call',   false, false]
-  trace_log[2].assert == [String, :'+', 'c-return', false, false]
+  trace_log.assert.include? [String, :strip, 'c-call',   false, false]
+  trace_log.assert.include? [String, :strip, 'c-return', false, false]
 
-For reference, trace_log[0] and trace_log[3] simply refer to the
+For reference, the other trace_log elements simply refer to the
 QED run context.
 
