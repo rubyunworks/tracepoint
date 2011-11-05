@@ -1,0 +1,89 @@
+
+<h1>TracePoint</h1>
+
+<p><a href="http://rubyworks.github.com/tracepoint">Home</a> | <a
+href="http://github.com/rubyworks/tracepoint">Code</a> | <a
+href="http://google.groups.com/group/rubyworks-mailinglist">Mail</a></p>
+
+<p><a href="http://travis-ci.org/rubyworks/tracepoint"><img
+src="http://travis-ci.org/rubyworks/tracepoint.png" /></a></p>
+
+<h2>Description</h2>
+
+<p>TracePoint is a Binding with the addition of event information. In theory
+it would function very well as the join-point for AOP. In practice it
+provides a better approach to #set_trace_func.</p>
+
+<p>IMPOTRANT! TracePoint does not <b>fully</b> work under Ruby 1.9.0-1.9.3,
+not because there is anything wrong with TracePoint, but because Ruby 1.9
+has a bug in `#set_trace_func` in which the binding parameter is incorrect.</p>
+
+<h2>Features</h2>
+<ul><li>
+<p>More versatile than #set_trace_func.</p>
+</li><li>
+<p>Easy to set multiple traces.</p>
+</li><li>
+<p>Can activate and deactivate traces on the fly.</p>
+</li></ul>
+
+<h2>Synopsis</h2>
+
+<p>Using TracePoint is simply a matter of setting the #trace procedure. For
+example to watch everything that happens during a Ruby process:</p>
+
+<pre>TracePoint.trace do |tp|
+  puts &quot;#{tp.self.class}\t#{tp.callee}\t#{tp.event}\t#{tp.return?}&quot;
+end
+
+TracePoint.activate
+
+1 + 1</pre>
+
+<p>Produces:</p>
+
+<pre>Object       line       false
+Fixnum   +   c-call     false
+Fixnum   +   c-return   false</pre>
+
+<p>Tracing can be deactivated and reactivated on the fly by calling
+#deactivate and #activate.</p>
+
+<p>To add additional trace procedures, simply call the #trace method again.
+Trace procedures can also be named by providing a name argument to the
+#trace method. This allows traces to be added and removed without affecting
+other traces.</p>
+
+<pre>TracePoint.trace(:class_trace) do |tp|
+  puts tp.self.class
+end
+
+TracePoint.trace(:method_trace) do |tp|
+  puts tp.callee
+end
+
+# ...
+
+TracePoint.clear(:class_trace)</pre>
+
+<p>Calling #clear with no arguments will remove all trace procedures and
+deactivate tracing.</p>
+
+<p>Please see the API documentation for more information.</p>
+
+<h2>Install</h2>
+
+<p>Follow the usual procedure for installing via RubyGems:</p>
+
+<pre>$ gem install tracepoint</pre>
+
+<h2>Copyrights</h2>
+
+<p>(BSD-2-Clause License)</p>
+
+<p>Copyright © 2005,2010 Rubyworks, Thomas Sawyer</p>
+
+<p>TracePoint is distributable in accordance with the terms of the
+<b>FreeBSD</b> license.</p>
+
+<p>See COPYING.rdoc for details.</p>
