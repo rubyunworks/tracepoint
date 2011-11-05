@@ -3,7 +3,7 @@ gem:
   active: true
 
 github:
-  active: true
+  folder: pages
 
 dnote:
   labels: ~

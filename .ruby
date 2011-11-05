@@ -5,7 +5,7 @@ authors:
 - name: Thomas Sawyer
   email: transfire@gmail.com
 copyrights:
-- holder: Thomas Sawyer
+- holder: Rubyworks, Thomas Sawyer
   year: '2005'
   license: BSD-2-Clause
 replacements: []
@@ -42,4 +42,4 @@ description: ! "A TracePoint is a Binding with the addition of event information
   other things, it functions very well as the join-point for\nAOP. In practice it
   provides a better alternative to using \nset_trace_func."
 organization: RubyWorks
-date: '2011-10-22'
+date: '2011-11-05'
