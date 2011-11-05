@@ -5,6 +5,11 @@
 This release simply brings the project uptodate with the latest
 build tools, and switches the license to BSD-2-Clause.
 
+Also note, that Ruby 1.9 appears to have a bug (or two) in #set_trace_func,
+in particular with an incorrect binding parameter. TracePoint still works,
+but will not as useful as it should be until this issue is resolved.
+(ref. http://redmine.ruby-lang.org/issues/5527).
+
 Changes:
 
 * Modernize build configuration.
