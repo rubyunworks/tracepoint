@@ -8,7 +8,7 @@ github:
 dnote:
   labels: ~
   output:
-    - log/NOTES.rdoc
+    - log/Notes.rdoc
 
 qed:
   files: spec/

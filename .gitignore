@@ -1,9 +1,9 @@
 .reap/digest
 .yardoc
+doc
 docs
 log
 pkg
 tmp
-SPEC.rdoc
-
 pages
+SPEC.rdoc
