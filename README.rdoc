@@ -1,25 +1,32 @@
 = TracePoint
 
-== RESOURCES
+{Home}[http://rubyworks.github.com/tracepoint] |
+{Code}[http://github.com/rubyworks/tracepoint] |
+{Mail}[http://google.groups.com/group/rubyworks-mailinglist]
 
-* home: http://rubyworks.github.com/tracepoint
-* code: http://github.com/rubyworks/tracepoint
+{<img src="http://travis-ci.org/rubyworks/tracepoint.png" />}[http://travis-ci.org/rubyworks/tracepoint]
 
 
-== DESCRIPTION
+== Description
 
 TracePoint is a Binding with the addition of event information.
 In theory it would function very well as the join-point for AOP.
 In practice it provides a better approach to #set_trace_func.
 
+IMPOTRANT! TracePoint does not *fully* work under Ruby 1.9.0-1.9.3,
+not because there is anything wrong with TracePoint, but because
+Ruby 1.9 has a bug in `#set_trace_func` in which the binding parameter
+is incorrect.
 
-== FEATURES
+
+== Features
 
 * More versatile than #set_trace_func.
 * Easy to set multiple traces.
+* Can activate and deactivate traces on the fly.
 
 
-== SYNOPSIS
+== Synopsis
 
 Using TracePoint is simply a matter of setting the #trace procedure.
 For example to watch everything that happens during a Ruby process:
@@ -64,14 +71,14 @@ deactivate tracing.
 Please see the API documentation for more information.
 
 
-== INSTALLATION
+== Install
 
 Follow the usual procedure for installing via RubyGems:
 
   $ gem install tracepoint
 
 
-== LICENSE
+== Copyrights
 
 (BSD-2-Clause License)
 
