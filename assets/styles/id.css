@@ -4,14 +4,14 @@
 
 /* #header */
 
-#header {position:relative; margin:0; padding:0; padding-right:200px;}
+#header {position:relative; margin:0; padding:0; padding-right:180px;}
 
 #header .title {width:720px; margin:0 auto; padding:0;}
 #header .title ul {padding-left: 20px;}
 
 /* #nav */
 
-#nav { position: fixed; padding: 20px; right: 0; top: 40px; width: 200px;
+#nav { position: fixed; padding: 20px; right: 0; top: 40px; width: 180px;
   border-top: 4px solid; border-left: 4px solid; border-bottom: 4px solid;
   -moz-border-radius-topleft: 20px; -webkit-border-top-left-radius: 20px;
   -moz-border-radius-bottomleft: 20px; -webkit-border-bottom-left-radius: 20px;
@@ -26,7 +26,7 @@
 
 /* #main */
 
-#main { padding: 0px; padding-right: 200px; }
+#main { padding: 0px; padding-right: 180px; }
 
 #main .doc { width: 720px; margin: 0 auto; padding: 0 0 10px 0; }
 #main .doc h2 { border-left: 0px solid; padding-left: 0; }
@@ -35,7 +35,7 @@
 
 /* #footer */
 
-#footer { padding-right: 200px; margin-top: 30px; }
+#footer { padding-right: 180px; margin-top: 30px; }
 #footer .advert { width: 720px; margin: 0 auto; }
 #footer .copyright { width: 720px; margin: 0 auto; margin-top: 20px; padding: 20px 0px 35px 0px; }
 
