@@ -4,9 +4,9 @@
 
 /* #header */
 
-#header {position:relative; padding-right:200px;}
+#header {position:relative; margin:0; padding:0; padding-right:200px;}
 
-#header .title {width:720px; margin:0 auto; padding:10px 0;}
+#header .title {width:720px; margin:0 auto; padding:0;}
 #header .title ul {padding-left: 20px;}
 
 /* #nav */
@@ -28,7 +28,7 @@
 
 #main { padding: 0px; padding-right: 200px; }
 
-#main .doc { width: 720px; margin: 0 auto; padding: 20px 0 10px 0; min-height: 890px; }
+#main .doc { width: 720px; margin: 0 auto; padding: 0 0 10px 0; }
 #main .doc h2 { border-left: 0px solid; padding-left: 0; }
 #main .doc h2 img { margin: 0 0 0 0; }
 #main .doc h3 { border-bottom: 1px dotted; }
@@ -103,7 +103,7 @@
 #main .doc { }
 #main .doc a { color: #5F550A; }
 #main .doc a:hover { }
-#main .doc p { color: #333333; }
+#main .doc p { color: #999; }
 #main .doc h2 { color: #5F550A; border-color: #DFD48A; }
 #main .doc h3 { border-color: #DFD48A; }
 

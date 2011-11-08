@@ -2,13 +2,14 @@
 
 /* LAYOUT */
 
-body {margin:0;padding:0;position:relative;}
+html {margin:0;padding:0;}
+body {margin:0;padding:0;}
  div {margin:0;padding:0;}
   h1 {margin:5px 0;}
   li {padding:3px 0;}
  pre {margin:10px 0;}
  pre code {padding:10px 10px;}
- img {border:none;}
+ img {border:none;padding:0;margin:0;}
   td {vertical-align:top;}
 
 /* FONT */
@@ -24,7 +25,7 @@ body { }
 
 /* COLOR */
 
-body { color: #333333; background: #ffeeee; }
+body { color: #999; }
 h1 { }
 a { color: #5F550A; }
 pre { color: white; }
