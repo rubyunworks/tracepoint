@@ -3,33 +3,33 @@ gem:
   active: true
 
 github:
-  folder: pages
+  gh_pages: web
 
 dnote:
+  title: Source Notes
   labels: ~
-  output:
-    - log/Notes.rdoc
+  output: log/notes.html
 
 qed:
-  files: spec/
+  files: demo
 
 qedoc:
-  files: spec/
-  output: SPEC.rdoc
+  files: demo
+  title: TracePoint Demonstrandum
+  output: DEMO.rdoc
 
 yard:
   priority: 2
 
 vclog:
   output:
-    - log/Changes.rdoc
-    - log/History.rdoc
+    - log/changes.html
+    - log/history.html
 
 email:
   mailto:
     - ruby-talk@ruby-lang.org
     - rubyworks-mailinglist@googlegroups.com
-
 
 
 #rubyforge:

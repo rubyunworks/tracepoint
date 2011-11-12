@@ -1,6 +1,6 @@
 ---
 source:
-- meta
+- var
 authors:
 - name: Thomas Sawyer
   email: transfire@gmail.com
@@ -42,4 +42,4 @@ description: ! "A TracePoint is a Binding with the addition of event information
   other things, it functions very well as the join-point for\nAOP. In practice it
   provides a better alternative to using \nset_trace_func."
 organization: RubyWorks
-date: '2011-11-05'
+date: '2011-11-11'

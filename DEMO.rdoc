@@ -1,0 +1,34 @@
+= TracePoint 
+
+To demonstrate TracePoint, we will simply have it feed all
+event parameters into the log for a simple String call.
+
+First we need to load the `tracepoint.rb` library.
+
+  require 'tracepoint'
+
+Now we can setup the trace procedure.
+
+  trace_log = []
+
+  TracePoint.trace do |tp|
+    trace_log << [tp.self.class, tp.callee, tp.event, tp.return?, tp.back == tp.bind]
+  end
+
+And then we can activate the trace, call our String method,
+and deactivate the trace.
+
+  TracePoint.activate
+  "  a  ".strip
+  TracePoint.deactivate
+
+We should now see in the log the set of events required to
+perform the addition operation.
+
+  trace_log.assert.include? [String, :strip, 'c-call',   false, false]
+  trace_log.assert.include? [String, :strip, 'c-return', false, false]
+
+For reference, the other trace_log elements simply refer to the
+QED run context.
+
+
