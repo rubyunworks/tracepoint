@@ -18,6 +18,9 @@ not because there is anything wrong with TracePoint, but because
 Ruby 1.9 has a bug in `#set_trace_func` in which the binding parameter
 is incorrect.
 
+*Rubinus Users*, Rubinus does not support #set_trace_func as this time
+so TracePoint can not help you.
+
 
 == Features
 
