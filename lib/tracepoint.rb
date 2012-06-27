@@ -300,33 +300,43 @@ class TracePoint #< CodePoint
   #
   # @!method before?
   #   TracePoint event matches `call` or `c-call`?
+  #   @return [Boolean]
   #
   # @!method after?
   #   TracePoint event matches `return` or `c-return`?
+  #   @return [Boolean]
   #
   # @!method call?
   #   TracePoint event matches `call`?
+  #   @return [Boolean]
   #
   # @!method return?
   #   TracePoint event matches `return`?
+  #   @return [Boolean]
   #
-  # @!method c-call?
+  # @!method ccall?
   #   TracePoint event matches `c-call`?
+  #   @return [Boolean]
   #
-  # @!method c-return?
+  # @!method creturn?
   #   TracePoint event matches `c-return`?
+  #   @return [Boolean]
   #
   # @!method line?
   #   TracePoint event matches `line`?
+  #   @return [Boolean]
   #
   # @!method class?
   #   TracePoint event matches `class`?
+  #   @return [Boolean]
   #
   # @!method end?
   #   TracePoint event matches `end`?
+  #   @return [Boolean]
   #
   # @!method raise?
   #   TracePoint event matches `raise`?
+  #   @return [Boolean]
   #
   EVENT_MAP.each_pair do |m,v|
     define_method( "#{m}?" ){ v.include?(@event) }
