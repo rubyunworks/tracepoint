@@ -7,6 +7,18 @@
 {<img src="http://travis-ci.org/rubyworks/tracepoint.png" />}[http://travis-ci.org/rubyworks/tracepoint]
 
 
+== IMPORTANT!
+
+The TracePoint gem is now deprecated. As of version 2.0.0, Ruby now has
+a built-in TracePoint API. Yes, it even uses the same name and has most
+of the same features. The API is a little different but it is very easy
+to adjust old code to the new API.
+
+If this library lives on at all, it will be with a revamped API as part
+of the backports gem so that old versions of RubyGems can make use of new
+Ruby 2.0 feature.
+
+
 == Description
 
 TracePoint is a Binding with the addition of event information.
