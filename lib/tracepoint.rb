@@ -1,13 +1,13 @@
-# = TracePoint
+# TracePoint is a better way to use #set_trace_func.
+# By definition a TracePoint is a Binding with the addition
+# of event information. Howerver, Binding can't be subclassed,
+# so the implementation delegates.
 #
-# A TracePoint is a Binding with the addition event information.
-# And it's a better way to use set_trace_func.
+# If it were not for the speed degration that comes fomr using
+# a tracing function, the tracepoint functions very well as the
+# join-point for Event-based AOP.
 #
-# A TracePoint is a Binding with the addition of event information.
-# Among other things, it functions very well as the join-point for
-# Event-based AOP.
-#
-# == Usage
+# Simple example of usage:
 #
 #   TracePoint.trace { |tp|
 #     puts "#{tp.self.class}\t#{tp.called}\t#{tp.event}\t#{tp.return?}\t#{tp.back == tp.bind}"
@@ -22,15 +22,30 @@
 #   Fixnum  +       c-call     false   false
 #   Fixnum  +       c-return   false   false
 #
-# == Notes
 #
-# CodePoint alias for Binding has been deprecated.
+# TracePoint provide a number of methods for working with events.
+# Here is a list of these methods and the events to which they
+# coorespond.
 #
-# We can't subclass Binding, so we delegate.
-
+#    all     => *all events*
+#    before  => call, c-call
+#    after   => return, c-return
+#    call    => call
+#    return  => return
+#    ccall   => c-call
+#    creturn => c-return
+#    line    => line
+#    class   => class
+#    end     => end
+#    raise   => raise
+# 
+# Note the CodePoing alias for Binding has been deprecated.
+#
 class TracePoint #< CodePoint
 
-  # Access to metadata.
+  # Access to project metadata. This simply provides information
+  # abouty the project. It is used by #const_missing, allowing 
+  # access most importantly to `TracePoint::VERSION`.
   def self.metadata
     @metadata ||= (
       require 'yaml'
@@ -38,17 +53,17 @@ class TracePoint #< CodePoint
     )
   end
 
-  # Access metadata as constants.
+  # Access metadata as constants. See #metdata.
+  #
+  # @example
+  #   TracePoint::VERSION  #=> '1.3.0'
+  #
   def self.const_missing(name)
     name = name.to_s.downcase
     metadata[name] || super(name)
   end
 
-  # TODO: this is here only b/c of lookup bugs in Ruby 1.8.x.
-  VERSION = metadata['version']
-
-  # -- class ---------------------
-
+  #  C L A S S  M E T H O D S
   class << self
 
     @@active = false
@@ -56,18 +71,36 @@ class TracePoint #< CodePoint
     @@index = {}
     @@procs = []
 
-    # Trace execution using a TracePoint.
+    # Setup a new tracing procedure.
+    #
+    # @param [Object] name
+    #   The name to use to identify given procedure.
+    #
+    # @yield [tracepoint] procedure
+    #   The tracing procedure.
+    #
+    # @yieldparam [TracePoint] Instance of TracePoint.
+    #   The tracing procedure.
+    #
+    # @return [Array] List of tracing procedures.
     def trace(name=nil, &procedure)
       @@index[name] = procedure if name
       @@procs << procedure
     end
 
     # Is tracing active?
+    #
+    # @return [Boolean] true if tracing is active.
     def active?
       @@active
     end
 
-    # Activate tracing.
+    # Use active method to begin tracing.
+    #
+    # @example
+    #   TracePoint.active
+    #
+    # @return [Proc] The factual function passed to #set_trace_func.
     def activate
       @@active = true
       bb_stack = []
@@ -93,7 +126,9 @@ class TracePoint #< CodePoint
       set_trace_func nil
     end
 
-    # Clear all trace procedures, or a specific trace by name. 
+    # Clear all trace procedures, or a specific trace by name.
+    #
+    # @return 
     def clear(name=nil)
       if name
         raise "Undefined trace -- #{name}" unless @@index.key?(name)
@@ -105,15 +140,58 @@ class TracePoint #< CodePoint
       end
     end
 
-  end #class
+  end
 
-  # -- instance -------------------
+  # Name of the event.
+  #
+  # @return [String] Event name
+  attr_accessor :event
 
-  attr_accessor :event, :file, :line, :binding, :back_binding
+  # File in which event occured.
+  #
+  # @return [String] File system path
+  attr_accessor :file
+
+  # Line number on which event occured.
+  #
+  # @return [Integer] Line number
+  attr_accessor :line
+
+  # The Binding context in which the even occured.
+  #
+  # @todo Does this method conflict with `Kernel#binding`?
+  #
+  # @return [Binding]
+  attr_accessor :binding
+
+  # The previous Binding context.
+  #
+  # @return [Binding]
+  attr_accessor :back_binding
 
   # Until Ruby has a built-in way to get the name of the calling method
   # that information must be passed into the TracePoint.
-  def initialize( event, file, line, method, bind, back_binding=bind )
+  #
+  # @param [String] event
+  #   The event name.
+  #
+  # @param [String] file
+  #   File system path to the file in which the event occured.
+  #
+  # @param [String] line
+  #   The line number of the file on which the event occured.
+  #
+  # @param [String] method
+  #   The name of the method in which the event occured.
+  #
+  # @param [Binding] bind
+  #   The binding of the object context in which the event occured.
+  #
+  # @param [Binding] back_bind
+  #   The previous binding. This is used so `return` events can
+  #   refer the binding of there originating `call` events.
+  #
+  def initialize(event, file, line, method, bind, back_binding=bind)
     @event   = event
     @file    = file
     @line    = line
@@ -123,11 +201,15 @@ class TracePoint #< CodePoint
   end
 
   # Shorthand for #binding.
+  #
+  # @return [Binding]
   def bind
     @binding
   end
 
   # Shorthand for #back_binding.
+  #
+  # @return [Binding]
   def back
     @back_binding
   end
@@ -138,23 +220,31 @@ class TracePoint #< CodePoint
     @binding.self #if @binding
   end
 
-  # Returns the name of the event's method.
-  #--
-  # This could delegate to the binding if Ruby had
-  # an internal way to retrieve the current method name.
-  #++
-  def callee ; @method ; end
+  # NOTE: The #callee method could delegate to the binding
+  # if Ruby had an internal way to retrieve the current
+  # method name.
 
-  #def method ; @method ; end            # TODO Conflict with Kernel#method ?
-  alias_method( :method_name, :callee )  # TODO deprecate
+  # Returns the name of the event's method.
+  def callee
+    @method
+  end
+
+  # Alternate name for #callee method.
+  #
+  # @deprecated Use #callee instead.
+  alias :method_name :callee
+
+  # Original name for #callee method.
+  #
+  # @deprecated Conflicts with Kernel#method.
+  #def method ; @method ; end
 
   # delegate to binding
   #def method_missing(meth, *args, &blk)
   #  @binding.send(meth, *args, &blk)
   #end
 
-  # methods for working with events
-
+  # TracePoint event references and the actual events to which they coorespond.
   EVENT_MAP = {
     :all     => ['call', 'c-call', 'return', 'c-return', 'line', 'class', 'end', 'raise'],
     :before  => ['call', 'c-call'],
@@ -168,40 +258,114 @@ class TracePoint #< CodePoint
     :end     => ['end'],
     :raise   => ['raise']
   }
-  def event_map(e) ; EVENT_MAP[e] ; end
 
-  # Is the trace point defined or undefined?
-  def event? ; !! @event ; end
-  def eventless? ; ! @event ; end
+  # Lookup the actual internal events for a given TracePoint event reference.
+  #
+  # @example
+  #   tracepoint.event_map(:before)
+  #   => ['call', 'c-call']
+  #
+  # @return [Array<String>] Event list.
+  def event_map(e)
+    EVENT_MAP[e.to_sym]
+  end
 
-  # For use in case conditions
+  # Is the trace point defined?
+  #
+  # @return [Boolean]
+  def event?
+    !! @event
+  end
+
+  # Is the trace point undefined?
+  #
+  # @return [Boolean]
+  def eventless?
+    ! @event
+  end
+
+  # For use in case conditions.
+  #
+  # @example
+  #   case tracepoint
+  #   when :before
+  #     ...
+  #   end
+  #
   def ===(e)
-    EVENT_MAP[e].include?(@event)
+    EVENT_MAP[e.to_sym].include?(@event)
   end
 
   # Creates an <event>? method for each of the above event mappings.
+  #
+  # @!method before?
+  #   TracePoint event matches `call` or `c-call`?
+  #   @return [Boolean]
+  #
+  # @!method after?
+  #   TracePoint event matches `return` or `c-return`?
+  #   @return [Boolean]
+  #
+  # @!method call?
+  #   TracePoint event matches `call`?
+  #   @return [Boolean]
+  #
+  # @!method return?
+  #   TracePoint event matches `return`?
+  #   @return [Boolean]
+  #
+  # @!method ccall?
+  #   TracePoint event matches `c-call`?
+  #   @return [Boolean]
+  #
+  # @!method creturn?
+  #   TracePoint event matches `c-return`?
+  #   @return [Boolean]
+  #
+  # @!method line?
+  #   TracePoint event matches `line`?
+  #   @return [Boolean]
+  #
+  # @!method class?
+  #   TracePoint event matches `class`?
+  #   @return [Boolean]
+  #
+  # @!method end?
+  #   TracePoint event matches `end`?
+  #   @return [Boolean]
+  #
+  # @!method raise?
+  #   TracePoint event matches `raise`?
+  #   @return [Boolean]
+  #
   EVENT_MAP.each_pair do |m,v|
     define_method( "#{m}?" ){ v.include?(@event) }
   end
 end
 
 
-class Binding #:nodoc:
+class Binding
 
   unless method_defined?(:eval) # 1.8.7+
 
-    # Evaluate a Ruby source code string (or block) in the binding context.
-    def eval(str)
-      Kernel.eval(str, self)
+    # Evaluate a Ruby source code string in the binding context.
+    #
+    # Ruby 1.9+ has this method built-in. It is only hear for
+    # older version of Ruby.
+    #
+    # @param [String] Source code.
+    #
+    def eval(code)
+      Kernel.eval(code, self)
     end
 
   end
 
-  # Returns self of the binding context.
+  # Returns `#self` on the binding context.
   def self()
     @_self ||= eval("self")
   end
 
 end
 
-# Copyright (c) 2005,2010 Thomas Sawyer (Apache 2.0 License)
+# Copyright (c) 2005,2010 Thomas Sawyer (FreeBSD License)
